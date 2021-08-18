@@ -1,0 +1,2 @@
+CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Duser.timezone=GMT -Xms512m -Xmx5120m -XX:MaxNewSize=512m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m -XX:NewSize=512m -XX:SurvivorRatio=7"
+CATALINA_OPTS="${CATALINA_OPTS} ${LIFERAY_JVM_OPTS}"
