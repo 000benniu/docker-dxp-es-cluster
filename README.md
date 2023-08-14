@@ -1,44 +1,25 @@
-# docker-dxp-es-cluster
-DXP cluster + ES cluster samples
+# Docker-compose for MySQL
+This docker-compose file is for spinning up MySQL server 8.0 with utf8mb4.
 
-### Usage
-Use docker to start these projects.
-1. mysql-compose
-1. elasticsearch654 ( 2 services )
-1. Liferay71 (2 services )
+# Precondition 
+- Docker installed
+- Docker compose installed
+  
+# Usage
+1. Clone this repo
+2. Run `docker-compose up --build`
+
+# How to set up the default tables
+Please see `db/mysql_init/01-databases.sql` and add tables accordingly.
+
+# How to cleanup the environment.
+1. Delete `db/mysql_data`
+2. Run `docker-compose down --rmi all --volumes --remove-orphans`
 
 ### Memos:
- - Set all services in same docker v-network (name : mysql-compose_default)
+ - Set all services in same docker v-network (name : mysql-lf-network)
  - Use docker's command to check v-network's status
     ```
      docker network ls
      docker network inspect ${network name}
-    ```
- - Change network address for services.
-     - elasticsearch654/es/config/elasticsearch.yml
-     - elasticsearch654/es2/config/elasticsearch.yml
-     - Liferay71/lr/liferay/files/tomcat/webapps/ROOT/WEB-INF/classes/ehcache/tcp.xml
-     - Liferay71/lr2/liferay/files/tomcat/webapps/ROOT/WEB-INF/classes/ehcache/tcp.xml
-     - Liferay71/docker-compose.yml
-    -  Liferay71/lr/liferay/files/portal-ext.properties
-     - Liferay71/lr2/liferay/files/portal-ext.properties
- - In case liferay's docker image can't find the jdbc driver, need this jar file.
-    Liferay71/lr/liferay/files/tomcat/lib/ext/mysql-connector-java-8.0.21.jar
-    Liferay71/lr2/liferay/files/tomcat/lib/ext/mysql-connector-java-8.0.21.jar
- - In case change the services jvm configs, need change this config file.
-    Liferay71/lr/liferay/files/tomcat/bin/setenv.sh
-    Liferay71/lr2/liferay/files/tomcat/bin/setenv.sh
- - use command to check elastic search cluster's status
-    ```
-    curl -X GET "[ESサーバのIP]:9200/_cat/nodes?v"
-    ```
- - If DXP cluster is set-up successfuly, these message can be find in log.
-    ```
-    Accepted view [{service'sID} | 1] (2)
-    ```
-    ```
-    properties: UDP                             //in case using UDP multi-cast
-    ```
-    ```
-    properties: TCP                             // in case using TCP unicast
     ```
